@@ -21,30 +21,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="軟體開發筆記">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="大約在一兩年前，我有一位朋友在華盛頓大學修習CSE 163: Intermediate Data Programming，這門課主要使用Python，課程中的一項作業是實作一個小型搜尋引擎，我覺得很有趣於是寫了一遍，也將這件事情分享出來。 Demo本作業有附2個資料夾，是搜尋時用的靜態文本庫，分別是wikipedia及small_wiki，裡面放的是一些wikipedia的HTML文本，wikip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python實作迷你搜尋引擎">
+<meta property="og:url" content="http://example.com/2022/02/15/mini-search-engine/index.html">
 <meta property="og:site_name" content="軟體開發筆記">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="大約在一兩年前，我有一位朋友在華盛頓大學修習CSE 163: Intermediate Data Programming，這門課主要使用Python，課程中的一項作業是實作一個小型搜尋引擎，我覺得很有趣於是寫了一遍，也將這件事情分享出來。 Demo本作業有附2個資料夾，是搜尋時用的靜態文本庫，分別是wikipedia及small_wiki，裡面放的是一些wikipedia的HTML文本，wikip">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/02/15/mini-search-engine/wiki-documents.png">
+<meta property="og:image" content="http://example.com/2022/02/15/mini-search-engine/execute-procedure-1.png">
+<meta property="og:image" content="http://example.com/2022/02/15/mini-search-engine/execute-procedure-2.png">
+<meta property="article:published_time" content="2022-02-15T11:10:41.000Z">
+<meta property="article:modified_time" content="2022-02-27T10:08:09.766Z">
 <meta property="article:author" content="David Liu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/02/15/mini-search-engine/wiki-documents.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/02/15/mini-search-engine/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>軟體開發筆記</title>
+  <title>用Python實作迷你搜尋引擎 | 軟體開發筆記</title>
   
 
 
@@ -143,9 +149,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -161,10 +168,9 @@
       <meta itemprop="name" content="軟體開發筆記">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/15/mini-search-engine/" class="post-title-link" itemprop="url">用Python實作迷你搜尋引擎</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          用Python實作迷你搜尋引擎
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -194,7 +200,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>大約在一兩年前，我有一位朋友在華盛頓大學修習<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/">CSE 163: Intermediate Data Programming</a>，這門課主要使用Python，課程中的<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/20sp/hw4/spec.html#files">一項作業</a>是實作一個小型搜尋引擎，我覺得很有趣於是寫了一遍，也將這件事情分享出來。</p>
+        <p>大約在一兩年前，我有一位朋友在華盛頓大學修習<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/">CSE 163: Intermediate Data Programming</a>，這門課主要使用Python，課程中的<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/20sp/hw4/spec.html#files">一項作業</a>是實作一個小型搜尋引擎，我覺得很有趣於是寫了一遍，也將這件事情分享出來。</p>
 <h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><p>本作業有附2個資料夾，是搜尋時用的靜態文本庫，分別是<code>wikipedia</code>及<code>small_wiki</code>，裡面放的是一些wikipedia的HTML文本，<code>wikipedia</code>資料夾底下有2,089個文本，<code>small_wiki</code>底下則只有70個文本。</p>
 <img src="/2022/02/15/mini-search-engine/wiki-documents.png" class="">
 
@@ -225,116 +231,30 @@
 
 <h5 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h5><p>除了這門課以外，我也參與過<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse142/22wi/index.html">CSE 142: Computer Programming I</a>所有的作業，個人認為華盛頓大學這幾門課，每一次的課堂內容和進度都不多，更多的是給學生時間獨立解決問題，而他們的作業都出得非常用心，每一個作業都和當週課堂內容與老師期望學生得到的技能有很深的關係並讓學生專注於此。另外也有詳細的文件，讓學生清楚作業要求的同時也會一點一點給學生提示和引導，培養學生解題的邏輯。<br/><br>更重要的是，每個作業都有一個小小的主題而不致乏味，並在作業之中要求學生的程式碼品質，能在一份作業當中同時給予、培養學生多項實用的技能，是我覺得很難得的部分。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Liu">
-      <meta itemprop="description" content="Description">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="軟體開發筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/" class="post-title-link" itemprop="url">解決Azure VM RDP "An internal error has occured"問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-12 23:25:20" itemprop="dateCreated datePublished" datetime="2022-02-12T23:25:20+08:00">2022-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-14 20:46:18" itemprop="dateModified" datetime="2022-02-14T20:46:18+08:00">2022-02-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>幾天前，我在Azure VM上的四台Windows Server 2016有三台在同一天忽然無法使用遠端桌面連線進入，接著隔天僅存的一台也無法遠端桌面連線進入了，而錯誤都顯示是”內部錯誤”(An internal error has occured)，以下分享我的解決過程。</p>
-<h5 id="查詢發生原因"><a href="#查詢發生原因" class="headerlink" title="查詢發生原因"></a>查詢發生原因</h5><p>由於沒有辦法進入到該台伺服器中，所以我從Azure Portal的「執行命令」(Run Command)中的RunPowerShellScript來處理。</p>
-<ol>
-<li>查詢系統紀錄檔是否有相關錯誤 (由於發生時間近，只抓出最新30筆紀錄)<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-EventLog</span> <span class="literal">-LogName</span> System <span class="literal">-newest</span> <span class="number">30</span></span><br></pre></td></tr></table></figure>
-<img src="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/system-log-1.png" class=""></li>
-</ol>
-<p>在System log中看見Index 50564的Error是由TermService造成，TermService就是遠端桌面服務，因此進一步列出詳細錯誤訊息。</p>
-<blockquote>
-<p><em>Windows Server 2008<strong>以前</strong>遠端桌面連線服務稱為TermService (Terminal Service)</em><br><em>Windows Server 2008<strong>以後</strong>稱為RDS (Remote Desktop Services)</em><br><em>(見<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Remote_Desktop_Services">Wikipedia</a>)</em></p>
-</blockquote>
-<ol start="2">
-<li>找到Error Log後，針對該筆Event列出詳細的錯誤訊息<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-EventLog</span> <span class="literal">-LogName</span> System <span class="literal">-Index</span> <span class="number">50564</span> | <span class="built_in">select</span> <span class="literal">-ExpandProperty</span> message</span><br></pre></td></tr></table></figure>
-<img src="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/rdp-certificate-access-denied.png" class=""></li>
-</ol>
-<p>從PowerShell的輸出中，發現在進行遠端桌面連線時，RD Session Host Server在創建一個新的自簽憑證時，因為權限問題發生Access is denied，因此推測問題發生在存放此自簽憑證的資料夾或檔案權限上，經過一些研究，只要讓遠端桌面服務找不到原始的 C:\ProgramData\Microsoft\Crypto\RSA\Machinekeys 資料夾，就會創建一個新的MachineKeys資料夾及憑證，因此我使用這個方式讓系統幫我建立預設權限。</p>
-<h5 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h5><ol>
-<li><p>透過Netstat查詢目前3389 port的使用情況</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Netstat <span class="literal">-anob</span> | more</span><br></pre></td></tr></table></figure>
-<img src="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/check-3389port.png" class=""></li>
-<li><p>若當前3389 port正在運作，關閉占用3389 port的服務 (在我的例子中是Termservice)</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Stop-Service</span> <span class="literal">-Name</span> Termservice <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更改C:\ProgramData\Microsoft\Crypto\RSA\Machinekeys資料夾名稱</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Rename-Item</span> C:\ProgramData\Microsoft\Crypto\RSA\Machinekeys C:\ProgramData\Microsoft\Crypto\RSA\Machinekeys_original</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重啟Termservice</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Start-Service</span> <span class="literal">-Name</span> Termservice</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新使用遠端桌面連線連至目的端</p>
-</li>
-</ol>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/" rel="prev" title="解決Azure VM RDP "An internal error has occured"問題">
+      <i class="fa fa-chevron-left"></i> 解決Azure VM RDP "An internal error has occured"問題
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -387,6 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Demo"><span class="nav-number">1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%9C%E6%A5%AD%E7%B0%A1%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">作業簡述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">實作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">4.</span> <span class="nav-text">結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
