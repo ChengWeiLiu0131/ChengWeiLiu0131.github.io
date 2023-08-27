@@ -149,6 +149,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/27/iis-reverse-proxy-oauth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="David Liu">
+      <meta itemprop="description" content="Description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="軟體開發筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/27/iis-reverse-proxy-oauth/" class="post-title-link" itemprop="url">解決 IIS Reverse Proxy OAuth Redirect 問題</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-08-27 16:48:51 / Modified: 20:12:40" itemprop="dateCreated datePublished" datetime="2023-08-27T16:48:51+08:00">2023-08-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>由於 SonarQube 不支援 HTTPS 的關係，若要使用 HTTPS 訪問 SonarQube Server，會需要在 SonarQube Server 前面使用 Reverse Proxy Server 做反向代理。<br>原先公司使用 Nginx 做反向代理伺服器，近期為了管理方便，想要轉為使用 IIS 作為反向代理伺服器，而在轉用 IIS 之後，在 SonarQube 與 Gitlab 進行 Single Site On (SSO) 時，會一直導回原頁而無法正常登入，研究發現是因為 IIS 的 <strong>Application Request Routing (ARR)</strong> 模組預設會 <strong>Rewrite Host</strong>，導致沒辦法導向 Gitlab 進行驗證，以下分享我的解決方法。</p>
+<h5 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h5><ol>
+<li><p>在 IIS 中進入 Application Request Routing 模組</p>
+<img src="/2023/08/27/iis-reverse-proxy-oauth/application-request-routing.png" class="">
+</li>
+<li><p>右側找到 Server Proxy Settings</p>
+<img src="/2023/08/27/iis-reverse-proxy-oauth/server-proxy-settings.png" class="">
+</li>
+<li><p>將 Reverse rewrite host in response headers 取消勾選並套用即可</p>
+<img src="/2023/08/27/iis-reverse-proxy-oauth/rewrite-host.png" class=""></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/15/mini-search-engine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -257,7 +326,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/" class="post-title-link" itemprop="url">解決Azure VM RDP "An internal error has occured"問題</a>
+            <a href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/" class="post-title-link" itemprop="url">解決 Azure VM RDP "An internal error has occured" 問題</a>
         </h2>
 
         <div class="post-meta">
@@ -274,7 +343,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-14 20:46:18" itemprop="dateModified" datetime="2022-02-14T20:46:18+08:00">2022-02-14</time>
+                <time title="Modified: 2023-08-27 19:59:03" itemprop="dateModified" datetime="2023-08-27T19:59:03+08:00">2023-08-27</time>
               </span>
 
           
@@ -400,7 +469,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -428,7 +497,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
