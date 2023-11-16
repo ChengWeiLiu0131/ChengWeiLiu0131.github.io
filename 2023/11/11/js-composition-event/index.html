@@ -21,30 +21,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="軟體開發筆記">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。   但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都無法偵測到正確的輸入，然而我們可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composition 事件">
+<meta property="og:url" content="http://example.com/2023/11/11/js-composition-event/index.html">
 <meta property="og:site_name" content="軟體開發筆記">
-<meta property="og:description" content="Description">
+<meta property="og:description" content="前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。   但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都無法偵測到正確的輸入，然而我們可以">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-11T14:49:15.000Z">
+<meta property="article:modified_time" content="2023-11-16T14:11:36.024Z">
 <meta property="article:author" content="David Liu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/11/11/js-composition-event/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>軟體開發筆記</title>
+  <title>Composition 事件 | 軟體開發筆記</title>
   
 
 
@@ -143,9 +145,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -161,10 +164,9 @@
       <meta itemprop="name" content="軟體開發筆記">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/11/11/js-composition-event/" class="post-title-link" itemprop="url">Composition 事件</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Composition 事件
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,6 +186,13 @@
               </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -194,247 +203,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。  </p>
+        <p>前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。  </p>
 <p>但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都無法偵測到正確的輸入，然而我們可以使用 JavaScript 監聽 <strong>compositionstart</strong> 和 <strong>compositionend</strong> 事件來達成。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/11/11/js-composition-event/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<span id="more"></span>
+<h5 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> textarea = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;textarea&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> digits = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="title class_">Array</span>(<span class="number">10</span>)).<span class="title function_">map</span>(<span class="function">(<span class="params">e, i</span>) =&gt;</span> i.<span class="title function_">toString</span>());</span><br><span class="line"><span class="keyword">const</span> ctrlKeys = [<span class="string">&quot;Enter&quot;</span>, <span class="string">&quot;Backspace&quot;</span>, <span class="string">&quot;Delete&quot;</span>, <span class="string">&quot;ArrowUp&quot;</span>, <span class="string">&quot;ArrowDown&quot;</span>, <span class="string">&quot;ArrowLeft&quot;</span>, <span class="string">&quot;ArrowRight&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> content = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;compositionstart&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">	content = textarea.<span class="property">value</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;compositionend&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">	textarea.<span class="property">value</span> = content;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;focusout&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">	textarea.<span class="property">value</span> = content;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">textarea.<span class="title function_">addEventListener</span>(<span class="string">&quot;paste&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">	e.<span class="title function_">preventDefault</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">textarea.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">if</span> (!digits.<span class="title function_">includes</span>(e.<span class="property">key</span>.<span class="title function_">toString</span>()) &amp;&amp; !ctrlKeys.<span class="title function_">includes</span>(e.<span class="property">key</span>.<span class="title function_">toString</span>())) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h5><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionstart_event">compositionstart_event</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/compositionend_event">compositionend_event</a></li>
+</ul>
+</blockquote>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/27/iis-reverse-proxy-oauth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Liu">
-      <meta itemprop="description" content="Description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="軟體開發筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/27/iis-reverse-proxy-oauth/" class="post-title-link" itemprop="url">解決 IIS Reverse Proxy OAuth Redirect 問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-27 16:48:51" itemprop="dateCreated datePublished" datetime="2023-08-27T16:48:51+08:00">2023-08-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-16 21:11:05" itemprop="dateModified" datetime="2023-11-16T21:11:05+08:00">2023-11-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>由於 SonarQube 不支援 HTTPS 的關係，若要使用 HTTPS 訪問 SonarQube Server，會需要在 SonarQube Server 前面使用 Reverse Proxy Server 做反向代理。<br>原先公司使用 Nginx 做反向代理伺服器，近期為了管理方便，想要轉為使用 IIS 作為反向代理伺服器，而在轉用 IIS 之後，在 SonarQube 與 Gitlab 進行 Single Site On (SSO) 時，會一直導回原頁而無法正常登入，研究發現是因為 IIS 的 <strong>Application Request Routing (ARR)</strong> 模組預設會 <strong>Rewrite Host</strong>，導致沒辦法導向 Gitlab 進行驗證，以下分享我的解決方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/27/iis-reverse-proxy-oauth/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/15/mini-search-engine/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Liu">
-      <meta itemprop="description" content="Description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="軟體開發筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/15/mini-search-engine/" class="post-title-link" itemprop="url">用Python實作迷你搜尋引擎</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-15 19:10:41" itemprop="dateCreated datePublished" datetime="2022-02-15T19:10:41+08:00">2022-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-16 21:11:05" itemprop="dateModified" datetime="2023-11-16T21:11:05+08:00">2023-11-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大約在一兩年前，我有一位朋友在華盛頓大學修習<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/">CSE 163: Intermediate Data Programming</a>，這門課主要使用Python，課程中的<a target="_blank" rel="noopener" href="https://courses.cs.washington.edu/courses/cse163/20sp/hw4/spec.html#files">一項作業</a>是實作一個小型搜尋引擎，我覺得很有趣於是寫了一遍，也將這件事情分享出來。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/15/mini-search-engine/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/27/iis-reverse-proxy-oauth/" rel="prev" title="解決 IIS Reverse Proxy OAuth Redirect 問題">
+      <i class="fa fa-chevron-left"></i> 解決 IIS Reverse Proxy OAuth Redirect 問題
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="David Liu">
-      <meta itemprop="description" content="Description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="軟體開發筆記">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/" class="post-title-link" itemprop="url">解決 Azure VM RDP "An internal error has occured" 問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-12 23:25:20" itemprop="dateCreated datePublished" datetime="2022-02-12T23:25:20+08:00">2022-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-16 21:10:15" itemprop="dateModified" datetime="2023-11-16T21:10:15+08:00">2023-11-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>幾天前，我在Azure VM上的四台Windows Server 2016有三台在同一天忽然無法使用遠端桌面連線進入，接著隔天僅存的一台也無法遠端桌面連線進入了，而錯誤都顯示是”內部錯誤”(An internal error has occured)，以下分享我的解決過程。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -487,6 +291,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
