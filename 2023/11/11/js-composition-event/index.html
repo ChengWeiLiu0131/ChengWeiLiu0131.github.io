@@ -18,13 +18,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chengweiliu0131.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。   但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都將輸入視為 處理(Process)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Composition 事件">
-<meta property="og:url" content="http://example.com/2023/11/11/js-composition-event/index.html">
+<meta property="og:url" content="https://chengweiliu0131.github.io/2023/11/11/js-composition-event/index.html">
 <meta property="og:site_name" content="軟體開發筆記">
 <meta property="og:description" content="前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。   但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都將輸入視為 處理(Process)">
 <meta property="og:locale" content="en_US">
@@ -33,7 +33,7 @@
 <meta property="article:author" content="David Liu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2023/11/11/js-composition-event/">
+<link rel="canonical" href="https://chengweiliu0131.github.io/2023/11/11/js-composition-event/">
 
 
 <script id="page-configurations">
@@ -152,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/11/js-composition-event/">
+    <link itemprop="mainEntityOfPage" href="https://chengweiliu0131.github.io/2023/11/11/js-composition-event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
