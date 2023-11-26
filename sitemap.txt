@@ -1,6 +1,0 @@
-http://example.com/2023/11/11/js-composition-event/
-http://example.com/2023/08/27/iis-reverse-proxy-oauth/
-http://example.com/2022/02/15/mini-search-engine/
-http://example.com/2022/02/12/solve-azure-vm-rdp-internal-error-has-occured/
-http://example.com/about/index.html
-http://example.com/
