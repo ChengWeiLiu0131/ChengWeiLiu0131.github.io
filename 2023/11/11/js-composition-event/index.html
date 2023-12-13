@@ -29,8 +29,10 @@
 <meta property="og:description" content="前陣子同事的專案需要在前端限制 textarea 只能輸入數字，主要的做法是使用 keydown 事件偵測現在按下的是什麼字，只要不是被允許的字元就不能夠輸入。   但是，中文輸入並不像英文輸入一樣按下按鍵就能直接完成輸入，而是會在注音或拼音組出一個字並按下 Enter 後，或者從 textarea focusout 才能完成輸入，在此之前 keydown 事件都將輸入視為 處理(Process)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-11T14:49:15.000Z">
-<meta property="article:modified_time" content="2023-11-16T14:35:45.161Z">
+<meta property="article:modified_time" content="2023-12-13T16:00:06.423Z">
 <meta property="article:author" content="David Liu">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Composition">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://chengweiliu0131.github.io/2023/11/11/js-composition-event/">
@@ -119,6 +121,16 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
@@ -182,8 +194,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-16 22:35:45" itemprop="dateModified" datetime="2023-11-16T22:35:45+08:00">2023-11-16</time>
+                <time title="Modified: 2023-12-14 00:00:06" itemprop="dateModified" datetime="2023-12-14T00:00:06+08:00">2023-12-14</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
@@ -222,6 +243,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Composition/" rel="tag"># Composition</a>
+          </div>
 
         
 
@@ -308,6 +333,18 @@
           <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
